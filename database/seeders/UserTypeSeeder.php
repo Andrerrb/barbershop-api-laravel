@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\UserType;
+use Illuminate\Database\Seeder;
 
 class UserTypeSeeder extends Seeder
 {
@@ -14,9 +13,8 @@ class UserTypeSeeder extends Seeder
     public function run(): void
     {
         $userTypes = [
-            ['name' => 'Admin'],
-            ['name' => 'Barber'],
-            ['name' => 'Customer'],
+            ['name' => 'admin'],
+            ['name' => 'client'],
         ];
 
         foreach ($userTypes as $type) {
