@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('scheduling', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            $table->foreignUuid('client_id')
+                ->constrained('clients')
+                ->cascadeOnDelete();
+
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+
             $table->timestamps();
         });
     }
