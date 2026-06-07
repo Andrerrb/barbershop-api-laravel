@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ClientController;
 use Illuminate\Http\Request;
@@ -16,10 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::get('/admin/test', function () {
-        return response()->json([
-            'message' => 'Administrator access granted.',
-        ]);
-    });
+    Route::post('/admins', [AdminController::class, 'store']);
 });
