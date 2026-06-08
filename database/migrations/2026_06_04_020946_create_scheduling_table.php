@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('scheduling', function (Blueprint $table) {
+        Schema::create('schedulings', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->foreignUuid('client_id')

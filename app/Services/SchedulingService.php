@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Mail\SchedulingCreatedMail;
 use App\Models\Scheduling;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class SchedulingService
@@ -37,11 +39,25 @@ class SchedulingService
             $data['end_date']
         );
 
-        return Scheduling::create([
+        $scheduling = Scheduling::create([
             'client_id' => $client->id,
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
         ])->load('client.user');
+
+        $admins = User::query()
+            ->whereHas('userType', function ($query) {
+                $query->where('name', 'admin');
+            })
+            ->get();
+
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->send(
+                new SchedulingCreatedMail($scheduling)
+            );
+        }
+
+        return $scheduling;
     }
 
     public function update(string $id, array $data): Scheduling

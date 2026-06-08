@@ -10,8 +10,6 @@ class Scheduling extends Model
 {
     use HasUuids;
 
-    protected $table = 'scheduling';
-
     protected $fillable = [
         'client_id',
         'start_date',
