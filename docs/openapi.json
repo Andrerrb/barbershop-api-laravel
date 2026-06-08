@@ -1,0 +1,925 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Módulo predefinido",
+        "description": "",
+        "version": "1.0.0"
+    },
+    "tags": [],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "summary": "Login",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "example": {
+                                "email": "admin@barbearia.com",
+                                "password": "password123"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "null"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                },
+                                                "user_type_id": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name",
+                                                "email",
+                                                "email_verified_at",
+                                                "created_at",
+                                                "updated_at",
+                                                "user_type_id"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "message",
+                                        "token",
+                                        "user"
+                                    ]
+                                },
+                                "example": {
+                                    "message": "Login successful.",
+                                    "token": "YOUR_TOKEN",
+                                    "user": {
+                                        "id": "019e95c3-4b82-7197-97d8-0627977b4fb3",
+                                        "name": "System Administrator",
+                                        "email": "admin@barbearia.com",
+                                        "email_verified_at": null,
+                                        "created_at": "2026-06-05T03:11:04.000000Z",
+                                        "updated_at": "2026-06-05T03:11:04.000000Z",
+                                        "user_type_id": "019e95c3-49f2-72cd-81f9-ba95a3bcbefc"
+                                    }
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "summary": "Logout",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "summary": "Get Authenticated User",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/register": {
+            "post": {
+                "summary": "Register Client",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "example": {
+                                "name": "Marina Souza",
+                                "email": "marina@email.com",
+                                "password": "password123",
+                                "password_confirmation": "password123",
+                                "phone": "11999999999",
+                                "address": "Rua Exemplo, 123",
+                                "city": "São Paulo"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/clients": {
+            "get": {
+                "summary": "List Clients",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/{uuid}": {
+            "get": {
+                "summary": "Show Client",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                },
+                                "example": {
+                                    "client": {
+                                        "id": "019ea339-8526-73d8-9a54-e1087bd5d7e2",
+                                        "user_id": "019ea339-84f4-73f8-95fc-cb69a90b98b7",
+                                        "phone": "11999999999",
+                                        "address": "Rua Exemplo, 123",
+                                        "city": "São Paulo",
+                                        "created_at": "2026-06-07T17:55:16.000000Z",
+                                        "updated_at": "2026-06-07T17:55:16.000000Z",
+                                        "user": {
+                                            "id": "019ea339-84f4-73f8-95fc-cb69a90b98b7",
+                                            "name": "Marina Souza",
+                                            "email": "marina@email.com",
+                                            "email_verified_at": null,
+                                            "created_at": "2026-06-07T17:55:16.000000Z",
+                                            "updated_at": "2026-06-07T17:55:16.000000Z",
+                                            "user_type_id": "019e95c3-4a49-70fa-9d39-1480ee74e663"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "summary": "Update Client",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                },
+                                "example": "Local error response example removed."
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Delete Client",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admins": {
+            "post": {
+                "summary": "Create Admin",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "example": {
+                                "name": "Admin Bloqueado Teste 4",
+                                "email": "admin.bloqueado4@barbearia.com",
+                                "password": "password123",
+                                "password_confirmation": "password123"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "List Admins",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admins/{uuid}": {
+            "get": {
+                "summary": "Show Admin",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                },
+                                "example": {
+                                    "admin": {
+                                        "id": "019e95c3-4b82-7197-97d8-0627977b4fb3",
+                                        "name": "System Administrator",
+                                        "email": "admin@barbearia.com",
+                                        "email_verified_at": null,
+                                        "created_at": "2026-06-05T03:11:04.000000Z",
+                                        "updated_at": "2026-06-05T03:11:04.000000Z",
+                                        "user_type_id": "019e95c3-49f2-72cd-81f9-ba95a3bcbefc"
+                                    }
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Delete Admin",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "examples": []
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "patch": {
+                "summary": "Update Admin",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "example": {
+                                "name": "Administrador Atualizado"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                },
+                                "example": {
+                                    "message": "Administrator updated successfully.",
+                                    "admin": {
+                                        "id": "019e95c3-4b82-7197-97d8-0627977b4fb3",
+                                        "name": "Administrador Atualizado",
+                                        "email": "admin@barbearia.com",
+                                        "email_verified_at": null,
+                                        "created_at": "2026-06-05T03:11:04.000000Z",
+                                        "updated_at": "2026-06-08T00:28:52.000000Z",
+                                        "user_type_id": "019e95c3-49f2-72cd-81f9-ba95a3bcbefc"
+                                    }
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/schedulings": {
+            "post": {
+                "summary": "Create Scheduling",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            },
+            "get": {
+                "summary": "List Schedulings",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/schedulings/{uuid}": {
+            "get": {
+                "summary": "Show Schedulings",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": []
+            },
+            "patch": {
+                "summary": "Update Scheduling",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "example": {
+                                "start_date": "2026-06-10 10:30:00",
+                                "end_date": "2026-06-10 11:30:00"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Delete Scheduling",
+                "deprecated": false,
+                "description": "",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "",
+                        "required": false,
+                        "example": "application/json",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": []
+                            },
+                            "examples": []
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": []
+                                }
+                            }
+                        },
+                        "headers": []
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": [],
+        "responses": [],
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "servers": [],
+    "security": []
+}
