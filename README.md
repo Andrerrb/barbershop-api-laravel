@@ -246,6 +246,28 @@ Schedulings
 └── Delete Scheduling
 ```
 
+## OpenAPI Documentation
+
+An exported OpenAPI specification is available at:
+
+```text
+docs/openapi.json
+```
+
+This file can be imported into Apidog, Postman, Insomnia, or any other OpenAPI-compatible tool to facilitate endpoint testing.
+
+After importing the specification, generate a fresh authentication token using:
+
+```text
+POST /api/login
+```
+
+Then use the returned token in protected endpoints:
+
+```text
+Authorization: Bearer YOUR_TOKEN
+```
+
 ## Important Notes
 
 * Main entities use UUIDs.
