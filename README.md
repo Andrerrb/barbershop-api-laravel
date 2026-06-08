@@ -1,59 +1,259 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Barbershop API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+RESTful API for managing a barbershop system, built with Laravel 12.
 
-## About Laravel
+The project provides authentication, administrator management, client management, scheduling management, conflict validation, and administrator notifications when a new scheduling is created.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* PHP 8.3+
+* Laravel 12
+* MySQL
+* Laravel Sanctum
+* Composer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+* Token-based authentication with Laravel Sanctum
+* Public client registration
+* Administrator-only access control with middleware
+* CRUD operations for administrators
+* CRUD operations for clients
+* CRUD operations for schedulings
+* UUIDs for main entities
+* Pagination for administrator, client, and scheduling listings
+* Scheduling conflict validation
+* Form Requests for data validation
+* Service Classes for business logic
+* E-mail notification for administrators when a scheduling is created
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Before running the project, make sure you have installed:
 
-## Laravel Sponsors
+* PHP 8.3 or higher
+* Composer
+* MySQL
+* Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation
 
-### Premium Partners
+Clone the repository:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+git clone https://github.com/Andrerrb/barbershop-api-laravel.git
+```
 
-## Contributing
+Enter the project directory:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cd barbershop-api-laravel
+```
 
-## Code of Conduct
+Install dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+Create the environment file:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+cp .env.example .env
+```
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+Create a MySQL database named:
+
+```text
+barbearia
+```
+
+Check the database settings in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=barbearia
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Run migrations and seeders:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Start the local server:
+
+```bash
+php artisan serve
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Initial Administrator
+
+The seeders create an initial administrator account for local testing:
+
+```text
+E-mail: admin@barbearia.com
+Password: password123
+```
+
+These credentials are intended only for development and testing.
+
+## Authentication
+
+The API uses Laravel Sanctum.
+
+After login, use the returned token in protected endpoints:
+
+```text
+Authorization: Bearer YOUR_TOKEN
+```
+
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint      | Description                          | Authentication |
+| ------ | ------------- | ------------------------------------ | -------------- |
+| POST   | `/api/login`  | Authenticate user and generate token | Public         |
+| POST   | `/api/logout` | Revoke current token                 | Required       |
+| GET    | `/api/user`   | Return authenticated user            | Required       |
+
+### Clients
+
+| Method | Endpoint                | Description           | Authentication |
+| ------ | ----------------------- | --------------------- | -------------- |
+| POST   | `/api/clients/register` | Register a new client | Public         |
+| GET    | `/api/clients`          | List clients          | Admin          |
+| GET    | `/api/clients/{client}` | Show a client         | Admin          |
+| PATCH  | `/api/clients/{client}` | Update a client       | Admin          |
+| DELETE | `/api/clients/{client}` | Delete a client       | Admin          |
+
+### Administrators
+
+| Method | Endpoint              | Description             | Authentication |
+| ------ | --------------------- | ----------------------- | -------------- |
+| POST   | `/api/admins`         | Create an administrator | Admin          |
+| GET    | `/api/admins`         | List administrators     | Admin          |
+| GET    | `/api/admins/{admin}` | Show an administrator   | Admin          |
+| PATCH  | `/api/admins/{admin}` | Update an administrator | Admin          |
+| DELETE | `/api/admins/{admin}` | Delete an administrator | Admin          |
+
+### Schedulings
+
+| Method | Endpoint                        | Description                                      | Authentication |
+| ------ | ------------------------------- | ------------------------------------------------ | -------------- |
+| POST   | `/api/schedulings`              | Create a scheduling for the authenticated client | Required       |
+| GET    | `/api/schedulings`              | List schedulings                                 | Admin          |
+| GET    | `/api/schedulings/{scheduling}` | Show a scheduling                                | Admin          |
+| PATCH  | `/api/schedulings/{scheduling}` | Update a scheduling                              | Admin          |
+| DELETE | `/api/schedulings/{scheduling}` | Delete a scheduling                              | Admin          |
+
+## Scheduling Validation
+
+A scheduling request must include:
+
+```json
+{
+  "start_date": "2026-06-11 14:00:00",
+  "end_date": "2026-06-11 15:00:00"
+}
+```
+
+The API validates that:
+
+* the end date is after the start date;
+* the authenticated user has a client profile;
+* the selected time does not overlap an existing scheduling.
+
+Example of conflicting intervals:
+
+```text
+Existing scheduling: 14:00 - 15:00
+New scheduling:      14:30 - 15:30
+Result:              422 Unprocessable Entity
+```
+
+## E-mail Notifications
+
+When a new scheduling is created, administrators receive an e-mail notification containing:
+
+* client name;
+* scheduling date;
+* start time;
+* end time.
+
+For local development, the default configuration uses:
+
+```env
+MAIL_MAILER=log
+```
+
+Generated e-mails are recorded in:
+
+```text
+storage/logs/laravel.log
+```
+
+To send real e-mails, replace the mail settings in `.env` with SMTP credentials.
+
+## Testing with Apidog
+
+The endpoints can be tested using Apidog, Postman, Insomnia, or another HTTP client.
+
+Recommended folder structure:
+
+```text
+Auth
+├── Login
+├── Logout
+└── Get Authenticated User
+
+Clients
+├── Register Client
+├── List Clients
+├── Show Client
+├── Update Client
+└── Delete Client
+
+Admins
+├── Create Admin
+├── List Admins
+├── Show Admin
+├── Update Admin
+└── Delete Admin
+
+Schedulings
+├── Create Scheduling
+├── List Schedulings
+├── Show Scheduling
+├── Update Scheduling
+└── Delete Scheduling
+```
+
+## Important Notes
+
+* Main entities use UUIDs.
+* Client data is stored across `users` and `clients`.
+* Administrators are stored in `users` and linked to the `admin` user type.
+* Scheduling conflicts are checked before insertions and updates.
+* Protected administrator endpoints use both Sanctum authentication and an administrator middleware.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project was developed as a technical challenge.
