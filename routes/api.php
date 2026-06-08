@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::post('/admins', [AdminController::class, 'store']);
+    Route::apiResource('admins', AdminController::class);
 });
