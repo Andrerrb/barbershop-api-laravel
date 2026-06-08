@@ -22,6 +22,13 @@ class SchedulingController extends Controller
         );
     }
 
+    public function agenda(): JsonResponse
+    {
+    return response()->json(
+        $this->schedulingService->agenda()
+    );
+    }
+    
     public function store(
         StoreSchedulingRequest $request
     ): JsonResponse {

@@ -20,6 +20,18 @@ class SchedulingService
             ->paginate(10);
     }
 
+    public function agenda(): LengthAwarePaginator
+{
+    return Scheduling::query()
+        ->select([
+            'id',
+            'start_date',
+            'end_date',
+        ])
+        ->orderBy('start_date')
+        ->paginate(10);
+}
+
     public function find(string $id): Scheduling
     {
         return Scheduling::with('client.user')->findOrFail($id);

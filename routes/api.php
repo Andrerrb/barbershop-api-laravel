@@ -16,6 +16,11 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+    Route::get('/schedulings/agenda', [
+    SchedulingController::class,
+    'agenda',
+    ]);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::post('/schedulings', [SchedulingController::class, 'store']);
