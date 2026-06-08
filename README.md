@@ -20,6 +20,7 @@ The project provides authentication, administrator management, client management
 * CRUD operations for administrators
 * CRUD operations for clients
 * CRUD operations for schedulings
+* Client access to occupied scheduling times
 * UUIDs for main entities
 * Pagination for administrator, client, and scheduling listings
 * Scheduling conflict validation
@@ -156,14 +157,14 @@ Authorization: Bearer YOUR_TOKEN
 
 ### Schedulings
 
-| Method | Endpoint | Description | Authentication |
-|---|---|---|---|
-| POST | `/api/schedulings` | Create a scheduling for the authenticated client | Required |
-| GET | `/api/schedulings/agenda` | List occupied scheduling times | Required |
-| GET | `/api/schedulings` | List schedulings | Admin |
-| GET | `/api/schedulings/{scheduling}` | Show a scheduling | Admin |
-| PATCH | `/api/schedulings/{scheduling}` | Update a scheduling | Admin |
-| DELETE | `/api/schedulings/{scheduling}` | Delete a scheduling | Admin |
+| Method | Endpoint                        | Description                                      | Authentication |
+| ------ | ------------------------------- | ------------------------------------------------ | -------------- |
+| POST   | `/api/schedulings`              | Create a scheduling for the authenticated client | Required       |
+| GET    | `/api/schedulings/agenda`       | List occupied scheduling times                   | Required       |
+| GET    | `/api/schedulings`              | List schedulings                                 | Admin          |
+| GET    | `/api/schedulings/{scheduling}` | Show a scheduling                                | Admin          |
+| PATCH  | `/api/schedulings/{scheduling}` | Update a scheduling                              | Admin          |
+| DELETE | `/api/schedulings/{scheduling}` | Delete a scheduling                              | Admin          |
 
 ## Scheduling Validation
 
@@ -241,23 +242,23 @@ Admins
 
 Schedulings
 ├── Create Scheduling
+├── View Scheduling Agenda
 ├── List Schedulings
 ├── Show Scheduling
 ├── Update Scheduling
 └── Delete Scheduling
 ```
 
-## OpenAPI Documentation
+## API Documentation
 
-An exported OpenAPI specification is available at:
+The API documentation exported from Apidog is available in two formats:
 
-```text
-docs/openapi.json
-```
+* `docs/openapi.json` — OpenAPI 3.0 specification
+* `docs/swagger.json` — Swagger 2.0 specification
 
-This file can be imported into Apidog, Postman, Insomnia, or any other OpenAPI-compatible tool to facilitate endpoint testing.
+Both files can be imported into Apidog or another compatible tool to facilitate endpoint testing.
 
-After importing the specification, generate a fresh authentication token using:
+After importing one of the specifications, generate a fresh authentication token using:
 
 ```text
 POST /api/login
@@ -276,6 +277,7 @@ Authorization: Bearer YOUR_TOKEN
 * Administrators are stored in `users` and linked to the `admin` user type.
 * Scheduling conflicts are checked before insertions and updates.
 * Protected administrator endpoints use both Sanctum authentication and an administrator middleware.
+* Authenticated clients can view occupied scheduling times through `/api/schedulings/agenda`.
 
 ## License
 
