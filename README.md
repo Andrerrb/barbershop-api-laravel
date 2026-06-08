@@ -156,13 +156,14 @@ Authorization: Bearer YOUR_TOKEN
 
 ### Schedulings
 
-| Method | Endpoint                        | Description                                      | Authentication |
-| ------ | ------------------------------- | ------------------------------------------------ | -------------- |
-| POST   | `/api/schedulings`              | Create a scheduling for the authenticated client | Required       |
-| GET    | `/api/schedulings`              | List schedulings                                 | Admin          |
-| GET    | `/api/schedulings/{scheduling}` | Show a scheduling                                | Admin          |
-| PATCH  | `/api/schedulings/{scheduling}` | Update a scheduling                              | Admin          |
-| DELETE | `/api/schedulings/{scheduling}` | Delete a scheduling                              | Admin          |
+| Method | Endpoint | Description | Authentication |
+|---|---|---|---|
+| POST | `/api/schedulings` | Create a scheduling for the authenticated client | Required |
+| GET | `/api/schedulings/agenda` | List occupied scheduling times | Required |
+| GET | `/api/schedulings` | List schedulings | Admin |
+| GET | `/api/schedulings/{scheduling}` | Show a scheduling | Admin |
+| PATCH | `/api/schedulings/{scheduling}` | Update a scheduling | Admin |
+| DELETE | `/api/schedulings/{scheduling}` | Delete a scheduling | Admin |
 
 ## Scheduling Validation
 
