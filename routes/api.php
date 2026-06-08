@@ -20,4 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::apiResource('admins', AdminController::class);
+    
+    Route::apiResource('clients', ClientController::class)
+    ->except(['store']);
 });
